@@ -71,7 +71,7 @@ jobs:
               
               PROMPT="Translate the following markdown file from Russian to English. Maintain all markdown formatting, frontmatter, and technical terms. Provide the translation in a markdown code block."
               
-              llm -m gemini "$PROMPT" -a "$FILE" -x > "$EN_FILE"
+              llm -m gemini --system "$PROMPT" -f "$FILE" -x > "$EN_FILE"
             fi
           done
 
