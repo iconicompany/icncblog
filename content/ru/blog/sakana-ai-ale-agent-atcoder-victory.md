@@ -5,7 +5,7 @@ date: "2026-01-10"
 slug: "sakana-ai-ale-agent-atcoder-victory"
 published: true
 tags: ["AI", "SakanaAI", "Inference Scaling", "AtCoder", "Multi-Agent Systems"]
-readTime: "15 мин. чтения"
+readTime: "14 мин. чтения"
 excerpt: "Агент от Sakana AI занял первое место на AtCoder, потратив $1300 на вычисления. Разбираем, как связка GPT-5.2 и Gemini 3 Pro под управлением эволюционных алгоритмов обходит топовых программистов."
 ---
 
