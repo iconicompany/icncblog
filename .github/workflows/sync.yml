@@ -13,7 +13,7 @@ jobs:
     steps:
       - name: Trigger Landing Page Sync
         run: |
-          curl -X POST https://icnc.dev/api/sync \
+          curl --fail --show-error -X POST https://icnc.dev/api/sync \
             -H "Authorization: Bearer ${{ secrets.SYNC_TOKEN }}" \
             -H "Content-Type: application/json" \
             -d "{\"url\": \"https://api.github.com/repos/${{ github.repository }}/contents/content/{lang}/blog?ref=${{ github.ref_name }}\"}"
