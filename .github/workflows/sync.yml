@@ -45,8 +45,6 @@ jobs:
           EOF
 
       - name: Translate Changed Russian Files
-        env:
-          OPENAI_API_BASE: https://litellm01.icncd.ru/v1
         run: |
           # Get list of changed files in content/ru
           # When triggered by push, github.event.before is the previous commit.
@@ -71,10 +69,9 @@ jobs:
               
               echo "Translating $FILE to $EN_FILE..."
               
-              PROMPT="Translate the following markdown file from Russian to English. Maintain all markdown formatting, frontmatter, and technical terms. Output only the translated content."
-              CONTENT=$(cat "$FILE")
+              PROMPT="Translate the following markdown file from Russian to English. Maintain all markdown formatting, frontmatter, and technical terms. Provide the translation in a markdown code block."
               
-              llm -m gemini "$PROMPT" --system "You are a professional translator for technical blogs." "$CONTENT" > "$EN_FILE"
+              llm -m gemini "$PROMPT" -a "$FILE" -x > "$EN_FILE"
             fi
           done
 
