@@ -1,7 +1,7 @@
 ---
 title: "Самоэволюционирующие мультиагентные экосистемы"
 description: "Автоматизация оптимизации мультиагентных систем через механизмы рекурсивного самоулучшения (RSI) и семантической мутации кода."
-date: "2026-01-09"
+date: "2026-01-05"
 slug: "self-evolving-multi-agent-ecosystems"
 published: true
 tags: ["AI", "Evolutionary Computing", "Multi-Agent Systems", "LLMOps"]
