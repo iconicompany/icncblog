@@ -64,6 +64,11 @@ jobs:
           for FILE in $CHANGED_FILES; do
             if [ -f "$FILE" ]; then
               EN_FILE=${FILE/content\/ru\//content\/en\/}
+              # Перевод пришёл в том же push — не затирать его автопереводом
+              if git diff --name-only $BEFORE_SHA ${{ github.sha }} | grep -qxF "$EN_FILE"; then
+                echo "Skipping $FILE: $EN_FILE changed in the same push."
+                continue
+              fi
               EN_DIR=$(dirname "$EN_FILE")
               mkdir -p "$EN_DIR"
               
