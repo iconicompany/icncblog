@@ -88,6 +88,7 @@ The third row is the most interesting. A test failed, the agent modifies the tes
 - "Agent commit" defined by trailer; agent commits without a trailer were attributed to "human".
 - Transcripts cover two out of three months and not all products. Subagent sessions were not analyzed in K2.
 - Procedure formulas were calculated based on 58% of modifications with reliable attachment. If the unattached 42% behave differently (e.g., boilerplate modifications are made without tests more often), the estimates are biased.
+- Attachment accuracy was checked on 30 events, and Claude verified them, not a human. There is no independent human labeling.
 - The corpus is live: sessions continue to run in the products, and a repeat run yields slightly different numbers. Snapshot as of 2026-10-27.
 
 The agent produces many checkmarks, and they are rarely reverted. But what it did for each of them, according to its own log, can only be determined for six out of ten modifications.
