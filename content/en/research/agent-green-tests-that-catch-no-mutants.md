@@ -1,5 +1,5 @@
 ---
-title: "Every Sixth 'Proven' Acceptance Criterion by a Coding Agent Relies on a Test That Catches No Breakages"
+title: "One in Six 'Proven' Acceptance Criteria of a Coding Agent Rely on a Test That Catches No Breakages"
 date: '2026-10-28'
 description: "We took 300 acceptance criteria that an autonomous agent marked as proven across 12 of its products and broke the code under each with mutations. In 16.3% [12.3; 20.3] of cases, the test remained green despite any breakage, confirmed by a test that catches the mutant. Two LLM judges, examining the test text, do not find such cases: κ between them is 0.57."
 tags: ["AI","LLM","Coding Agents","Testing","Mutation Testing","Research"]
@@ -17,7 +17,7 @@ Twelve products that our agent built using a single template (Bun, Elysia, Postg
 
 The agent works with slices: a slice is a vertical segment of a product with its own code directory and its own ACs. The 'proven' mark is set by a runner that reads a JUnit report and finds a green test with the criterion's ID in it. The checkmark cannot be faked manually. However, the runner only verifies the 'ID → green run' connection; it doesn't know if the test actually checks anything.
 
-## K1: Mutations by Slice Code
+## K1: Mutations on Slice Code
 
 From the proven ACs, we took 300 random ones with product quotas. For each, we generated mutants in the slice's code: deletion of `!`, replacement of comparisons, substitution of `return`, removal of calls, logic, arithmetic, `true/false`. We ran the associated test against each mutant. A mutant is killed if the test turned red.
 
@@ -53,7 +53,7 @@ Then I gave the writer what is legitimate for the question of equivalence: the d
 | valid targeted test killed no mutants | 4 | candidates for equivalent |
 | no valid test found | 16 | unknown |
 
-Four ACs where a valid targeted test failed to kill the mutant, and 16 ACs with no answer, could turn out to be equivalent-meaning, in the worst case, 20 out of 69. There are 49 confirmed vacuously green ACs. If we count only these as vacuous, the refined estimate is **16.3% [12.3; 20.3]** of 300 proven ACs. With the adjustment for tests outside the slice, it's **11.1% [7.7; 14.4]**. The central estimate remains above 10%, but the lower bound of the interval does not.
+Four ACs where a valid targeted test failed to kill the mutant, and 16 ACs with no answer, could turn out to be equivalent — meaning, in the worst case, 20 out of 69. There are 49 confirmed vacuously green ACs. If we count only these as vacuous, the refined estimate is **16.3% [12.3; 20.3]** of 300 proven ACs. With the adjustment for tests outside the slice, it's **11.1% [7.7; 14.4]**. The central estimate remains above 10%, but the lower bound of the interval does not.
 
 ## LLM Judge Does Not See Vacuous Tests
 
@@ -75,4 +75,4 @@ All of K1 ran on CPU, 1.7 hours on the longest product, with products processed 
 - A vacuously green test does not mean the function is broken. The test simply doesn't guard it: the next change might break it, and the checkmark will remain.
 - The corpus is singular: 12 products from a single agent based on one template.
 
-The agent's 'proven' checkmark is applied honestly by the runner upon a green test run. However, for approximately every sixth criterion, this checkmark is backed by a test that remained green despite every code breakage we introduced.
+The agent's 'proven' checkmark is applied honestly by the runner upon a green test run. However, for roughly one criterion in six, this checkmark is backed by a test that remained green despite every code breakage we introduced.

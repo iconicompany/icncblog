@@ -1,5 +1,5 @@
 ---
-title: "Agent authored 73% of commits in 12 products. For 58% of changes, it's possible to ascertain which criterion was addressed."
+title: "The Agent Authored 73% of Commits in 12 Products. For 58% of Changes, We Can Tell Which Criterion They Served"
 date: '2026-10-28'
 description: "Census of an autonomous coding agent's corpus: 12 products, 509k lines, 3,143 acceptance criteria, 2,057 commits. Checkmark regressions are rare (2.2%), but the activity log is poorly recoverable: 57.8% of changes are unambiguously linked to a slice or criterion, and history older than a month was erased by transcript rotation. Plus, initial procedure metrics: 34% of commits were made without a passing run after the last change."
 tags: ["AI","LLM","Coding Agents","Software Engineering","Research"]
@@ -20,11 +20,11 @@ The census (K0) was read-only: `git log`, `git show`, `ls-files` in each reposit
 | | total |
 |---|---|
 | products | 12 |
-| AC / proven | 3 143 / 2 368 (75%) |
+| AC / proven | 3,143 / 2,368 (75%) |
 | slices | 133 |
-| commits (agent / other) | 2 057 (1 497 / 560) |
-| lines in `src` (code / tests) | 508 917 (392k / 117k) |
-| ACs ever proven | 2 574 |
+| commits (agent / other) | 2,057 (1,497 / 560) |
+| lines in `src` (code / tests) | 508,917 (392k / 117k) |
+| ACs ever proven | 2,574 |
 | of which lost proof | 57 (2.2%) |
 
 The proportion of proven ACs varies significantly: from 23% for the largest product (682 ACs) to 98-100% for five others. Almost all unproven ACs lack a single test: 765 out of 775. Currently, no criterion has a "test failing" status.
@@ -35,7 +35,7 @@ I considered a commit with the trailer `Co-Authored-By: ...Claude` to be an agen
 
 Of the 2,574 ACs proven at least once, 57 lost their checkmark. Almost all transitions were due to "test missing": the test was deleted or renamed. A "test failing" transition was found for one criterion.
 
-In part, this is good news. However, a [parallel measurement (K1)](/en/research/agent-green-tests-that-catch-no-mutants) showed that for 16% of proven ACs, the associated test catches no code mutations. A test that checks nothing will also not turn red (fail). Therefore, the low proportion of regressions primarily indicates that the runner does not detect failures.
+In part, this is good news. However, a [parallel measurement (K1)](/en/research/agent-green-tests-that-catch-no-mutants) showed that for 16% of proven ACs, the associated test catches no code mutations. A test that checks nothing will also not turn red. Therefore, the low proportion of regressions primarily indicates that the runner does not detect failures.
 
 ## Unit of Analysis Differs from Plan
 
@@ -76,18 +76,18 @@ For strictly attached events, some procedure formulas are already computable. Th
 | formula | cases | violations |
 |---|---|---|
 | commit without a passing run after the last modification | 760 | 260 (34%) |
-| src slice modification without a failing test for that slice earlier in the session | 2 329 | 1 266 (54%) |
+| src slice modification without a failing test for that slice earlier in the session | 2,329 | 1,266 (54%) |
 | transition failing → passing, between which only tests were modified | 551 | 125 (23%) |
 | acceptance verification without integration or e2e run after modification | 43 | 40 |
 
-The third row is the most interesting. A test failed, the agent modifies the test, the test passes, the code remains untouched. Sometimes this is legitimate: the test was incorrect. But this is precisely the path by which a test that checks nothing emerges. Next step (K3): link this formula to the empty passing tests from K1. Of the twelve formulas in the plan, about seven are computable at the slice level; formulas at the criterion level require new transcripts where the agent explicitly invokes acceptance verification.
+The third row is the most interesting. A test failed, the agent modifies the test, the test passes, the code remains untouched. Sometimes this is legitimate: the test was incorrect. But this is precisely the path by which a test that checks nothing emerges. Next step (K3): link this formula to the vacuously green ACs from K1. Of the twelve formulas in the plan, about seven are computable at the slice level; formulas at the criterion level require new transcripts where the agent explicitly invokes acceptance verification.
 
 ## Limitations
 
-*   Single corpus: one agent, one template. Transferability to other stacks has not been verified.
-*   "Agent commit" defined by trailer; agent commits without a trailer were attributed to "human".
-*   Transcripts cover two out of three months and not all products. Subagent sessions were not analyzed in K2.
-*   Procedure formulas were calculated based on 58% of modifications with reliable attachment. If the unattached 42% behave differently (e.g., boilerplate modifications are made without tests more often), the estimates are biased.
-*   The corpus is live: sessions continue to run in the products, and a repeat run yields slightly different numbers. Snapshot as of 2026-10-27.
+- Single corpus: one agent, one template. Transferability to other stacks has not been verified.
+- "Agent commit" defined by trailer; agent commits without a trailer were attributed to "human".
+- Transcripts cover two out of three months and not all products. Subagent sessions were not analyzed in K2.
+- Procedure formulas were calculated based on 58% of modifications with reliable attachment. If the unattached 42% behave differently (e.g., boilerplate modifications are made without tests more often), the estimates are biased.
+- The corpus is live: sessions continue to run in the products, and a repeat run yields slightly different numbers. Snapshot as of 2026-10-27.
 
 The agent produces many checkmarks, and they are rarely reverted. But what it did for each of them, according to its own log, can only be determined for six out of ten modifications.
