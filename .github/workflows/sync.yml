@@ -54,7 +54,8 @@ jobs:
             BEFORE_SHA="HEAD~1"
           fi
           
-          CHANGED_FILES=$(git diff --name-only $BEFORE_SHA ${{ github.sha }} | grep '^content/ru/' || true)
+          ALL_CHANGED=$(git diff --name-only $BEFORE_SHA ${{ github.sha }})
+          CHANGED_FILES=$(echo "$ALL_CHANGED" | grep '^content/ru/' || true)
           
           if [ -z "$CHANGED_FILES" ]; then
             echo "No changes in content/ru/ found."
@@ -64,6 +65,11 @@ jobs:
           for FILE in $CHANGED_FILES; do
             if [ -f "$FILE" ]; then
               EN_FILE=${FILE/content\/ru\//content\/en\/}
+              # Перевод пришёл в том же push — не затирать его автопереводом
+              if [ -f "$EN_FILE" ] && echo "$ALL_CHANGED" | grep -qxF "$EN_FILE"; then
+                echo "Skipping $FILE: $EN_FILE changed in the same push."
+                continue
+              fi
               EN_DIR=$(dirname "$EN_FILE")
               mkdir -p "$EN_DIR"
               
