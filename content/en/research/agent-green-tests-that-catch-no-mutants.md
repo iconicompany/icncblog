@@ -25,7 +25,7 @@ We define an 'empty green' AC as one whose associated test did not kill any muta
 
 2,817 mutants were generated, 781 were killed. The average mutation score per AC was 0.28. There were 69 empty greens out of 300, which is 23.0% [18.7; 27.7].
 
-For 22 out of 69, the associated test did not execute any lines of the slice's code: the implementation lay in another module (e.g., an AC of the `identity/users` slice was proven by a test from the `auth/` module), and the mutants were missed. If mutations were moved to the lines executed by the test, all 20 such ACs, where there was something to mutate, passed the tests. With this adjustment, the result was 15.8% [11.7; 19.8]. I conceived this adjustment after seeing the data, so it is presented as a sensitivity analysis.
+For 22 out of 69, the associated test did not execute any lines of the slice's code: the implementation lay in another module (e.g., an AC of the `identity/users` slice was proven by a test from the `auth/` module), and the mutants were missed. If mutations were moved to the lines executed by the test, all 20 such ACs, where there was something to mutate, caught the mutants. With this adjustment, the result was 15.8% [11.7; 19.8]. I conceived this adjustment after seeing the data, so it is presented as a sensitivity analysis.
 
 The spread across products is large: 4.8% for one, 27.6% and 31.8% for two others. Unit tests are more often empty than integration tests (17.7% vs 14.6% with adjustment).
 
